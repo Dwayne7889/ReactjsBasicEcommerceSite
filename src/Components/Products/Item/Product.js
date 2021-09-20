@@ -1,6 +1,4 @@
 import React,{Component} from 'react';
-import { FormFloating } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
 import {ProductDetails} from './ProductDetails';
 import "./styles/Product.css";
 

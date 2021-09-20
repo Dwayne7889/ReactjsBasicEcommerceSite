@@ -47,12 +47,31 @@ this.setState({table:"d-none"});
         const {prods} = this.state;
       var total = prods.reduce((a,v) =>  a = a + v.productPrice , 0 );
       //used by remove function
+      // eslint-disable-next-line no-unused-vars
       let productId;
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+     const CartItems = {
+      UserEmail:UserSessions.getEmail(),
+      ProductTotal:total
+        };
+          // console.log(this.state);
+          axios.post(process.env.REACT_APP_API + 'Purchased/Create',CartItems)
+          .then(response => {
+          alert("CheckOut Successful, Email Sent!");
+          })
+          .catch(err => {
+            console.log(err);
+          });
+    }
 
         return(
             <div class="container">
+                <form id="CheckOut" onSubmit={handleSubmit}>
                 <label class="h5">{this.state.text}</label>
                 <div class={ this.state.table}>
+              
                 <table class="table table-bordered">
                 <thead class="BlueGradBackground p-2">
         <tr>
@@ -60,7 +79,6 @@ this.setState({table:"d-none"});
         <th>Product Name</th>
         <th>Product Quantity</th>
         <th>Product Price</th>
-    
         </tr>
         </thead>
                   {prods.map(prod=>
@@ -75,6 +93,7 @@ this.setState({table:"d-none"});
         </tr>
                   )}
                   </table>
+               
                   <div class="row">
                   <div class="col-md-6">
                 
@@ -82,10 +101,11 @@ this.setState({table:"d-none"});
                   <div class="col-md-6 text-right">
                   <h6>Total:</h6><h4 class="text-info">R {total}</h4> 
                   <br/>
-                  <Button className="btn btn-success">Process Order</Button>
+                  <Button className="btn btn-success" type="submit">Process Order</Button>
                   </div>
                   </div>
                   </div>
+                  </form>
             </div>
         )
     }
