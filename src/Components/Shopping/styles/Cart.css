@@ -1,0 +1,6 @@
+
+  .BlueGradBackground{
+    background: linear-gradient(
+    75deg, blue, darkblue) !important;
+    color:white !important;
+}

@@ -1,6 +1,5 @@
   
 import React,{Component} from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@material-ui/core';
 import "../styles/Products.css";
 
 
@@ -33,14 +32,19 @@ export class Products extends Component{
 
 <div className="product mb-3 mt-3 p-3" id={prod.id}>
 <div className="product__info">
-    <h3>{prod.productName}</h3>
-    <h5 className="product__price text-info">
+    <h2>{prod.productName}</h2>
+    <h4 className="product__price text-info">
         <strong>{prod.productPrice}</strong>
-    </h5>
+    </h4>
+   
 </div>
-<img src={prod.productImage}  alt="" title={prod.productImageName} />
+<div className="row">
+<div className="col-md-12 text-center">
+<img src={prod.productImage}  alt="" title={prod.productImageName} /> 
 </div>
-     
+
+</div>
+</div>
                   )}
             </div>
         )

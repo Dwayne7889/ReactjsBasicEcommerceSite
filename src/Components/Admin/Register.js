@@ -2,49 +2,47 @@ import React, { Component } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import { FormControl, InputLabel, Input } from '@material-ui/core';
 import "../styles/Register.css";
+import axios from 'axios';
 
 export class Register extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = { email: [], password: [], checkEmail: [] }
-  }
-
   render() {
-
     const handleSubmit = (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
-      // eslint-disable-next-line no-console
-      console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-      });
 
-      var email = data.get('email');
+      var EmailAddress = data.get('email');
       var password = data.get('password');
+      var active = 0;
 
-      fetch(process.env.REACT_APP_API + 'Users/Get/' + email)
-        .then(response => response.json())
+      fetch(process.env.REACT_APP_API + 'Users/Check/' + EmailAddress)
+        .then(response => response.ok)
         .then(data => {
-          this.setState({ checkEmail: data });
-          console.log("Value: " + data);
-        });
-      const { checkEmail } = this.state;
-
-      console.log('Check: ' + checkEmail);
-      //email duplication check
-      if (checkEmail.length > 0) {
+     //email duplication check
+      if (data === true) {
         alert("Email already exists");
       }
       else {
-
+        //Saves to DB
+        this.setState({EmailAddress, password,active});
+        // console.log(this.state);
+        axios.post(process.env.REACT_APP_API + 'Users/Create',this.state)
+        .then(response => {
+          // console.log(response);
+          alert("Please check your email address for Welcome Email");
+          //clears inputs
+          document.getElementById("Regform").reset();
+      
+        })
+        .catch(err => {
+          console.log(err);
+        });
       }
-    }
-
+    });
+  }
     return (
 
-      <form onSubmit={handleSubmit}>
+      <form id="Regform" onSubmit={handleSubmit}>
         <Card className="text-center mt-3 shadow-sm">
           <Card.Header className="bg-primary text-white h5 p-3">Registration Form</Card.Header>
           <Card.Body>
