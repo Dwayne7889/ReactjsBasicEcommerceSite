@@ -3,6 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 import { FormControl, InputLabel, Input } from '@material-ui/core';
 import "../styles/Register.css";
 import axios from 'axios';
+import   FadeIn from 'react-fade-in';
 
 export class Register extends Component {
 
@@ -41,10 +42,11 @@ export class Register extends Component {
     });
   }
     return (
-
+      <FadeIn>
+      <center>
       <form id="Regform" onSubmit={handleSubmit}>
-        <Card className="text-center mt-3 shadow-sm">
-          <Card.Header className="bg-primary text-white h5 p-3">Registration Form</Card.Header>
+          <Card className=" text-center mt-3 formCompCurve p-3 shadow-lg ">
+          <Card.Header className="BlueGradBackground text-white p-3 formHeadCurve"><h5>Registration Form</h5></Card.Header>
           <Card.Body>
             <div className="col-md-12">
               <FormControl className="text">
@@ -59,13 +61,14 @@ export class Register extends Component {
               </FormControl>
             </div>
             <div class="col-md-12 text-right mt-4">
-              <Button size="small" className="btn btn-primary p-2 mr-3" type="submit" >Register</Button>
+              <Button size="small" className="btn btn-success p-2 mr-3" type="submit" >Register</Button>
             </div>
           </Card.Body>
-          <Card.Footer className="bg-primary text-white p-3">Already have an account?&nbsp;<a href="./Signin" class="text-white h6">Signin</a></Card.Footer>
+          <Card.Footer className="bg-dark text-white p-3">Already have an account?&nbsp;<a href="./Signin" class="text-white h6">Signin</a></Card.Footer>
         </Card>
       </form>
-
+</center>
+</FadeIn>
     )
   }
 }

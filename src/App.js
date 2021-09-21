@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Home} from './Components/Home';
 import {Product} from './Components/Products/Item/Product';
@@ -10,15 +10,24 @@ import Signin from './Components/Admin/Signin';
 import {Cart} from './Components/Shopping/Cart';
 import {Navigation} from './Components/Navigation';
 import {NavigationLoggedIn} from './Components/NavigationLoggedIn';
-
 import {BrowserRouter, Switch, Route } from 'react-router-dom';
+import Loading from './Components/Loader/Loading';
+
 
 function App() {
   const [user, setUser] = useState("");
-
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+  })
   return (
+    
     <BrowserRouter>
-    <div className="container">
+    {isLoading===true?
+      <Loading/>:
+    <div className="container">       
     {(user !=="")?(
      <NavigationLoggedIn/>
      ):(
@@ -33,6 +42,7 @@ function App() {
        <Route path='/signin' component={() => <Signin signIn={user => setUser(user)}/>}/> 
      </Switch>
     </div>
+}
     </BrowserRouter> 
   );
  

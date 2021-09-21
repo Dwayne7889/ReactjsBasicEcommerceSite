@@ -4,6 +4,7 @@ import { FormControl, InputLabel, Input } from '@material-ui/core';
 import "../styles/Signin.css";
 import { useHistory } from 'react-router';
 import UserSessions from '../UserSessions';
+import   FadeIn from 'react-fade-in';
 
 
 function Signin(props) {
@@ -43,9 +44,11 @@ alert("Incorrect Email or Password!");
 
   return (
     <div>
+      <FadeIn>
+      <center>
              <form onSubmit={handleSubmit}>    
-              <Card className="text-center mt-3 shadow-sm">
-          <Card.Header className="bg-primary text-white h5 p-3">Signin Form</Card.Header>
+              <Card className=" text-center mt-3 formCompCurve p-3 shadow-lg ">
+          <Card.Header className="BlueGradBackground text-white p-3 formHeadCurve"><h5>Signin Form</h5></Card.Header>
           <Card.Body>
           <div className="col-md-12">
   <FormControl className="text">
@@ -60,13 +63,14 @@ alert("Incorrect Email or Password!");
         </FormControl>
   </div>
   <div class="col-md-12 text-right mt-4">
-  <Button size="small" className="btn btn-primary p-2 mr-3" type="submit" >Signin</Button>
+  <Button size="small" className="btn btn-success p-2 mr-3" type="submit" >Signin</Button>
   </div>
           </Card.Body>
-          <Card.Footer className="bg-primary text-white p-3">Don't have an account?&nbsp;<a href="./Register" class="text-white h6">Register</a></Card.Footer>
+          <Card.Footer className="bg-dark text-white p-3">Don't have an account?&nbsp;<a href="./Register" class="text-white h6">Register</a></Card.Footer>
         </Card>
         </form>
- 
+        </center>
+        </FadeIn>
     </div>
   )
 }

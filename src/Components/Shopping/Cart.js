@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import { Button } from 'react-bootstrap';
 import UserSessions from '../UserSessions';
 import axios from 'axios';
+import FadeIn from 'react-fade-in';
 
 export class Cart extends Component{
 
@@ -11,6 +12,7 @@ export class Cart extends Component{
             prods:[],
         email:UserSessions.getEmail() ,
         text:"" ,
+        textBtn:"Process Order",
         table:"d-none"     
         }
     }
@@ -43,7 +45,20 @@ this.setState({table:"d-none"});
           console.log(err);
         });
       }
+
+
+      
+      changeText = (textBtn) => {
+        this.setState({textBtn: !this.state.textBtn})
+      }
+    
+
     render(){
+      let textBtn;
+    
+      if(textBtn !=="Processing...Please Wait..."){
+        textBtn = this.state.textBtn ? "Process Order": "Processing...Please Wait..." ;
+      }
         const {prods} = this.state;
       var total = prods.reduce((a,v) =>  a = a + v.productPrice , 0 );
       //used by remove function
@@ -60,18 +75,21 @@ this.setState({table:"d-none"});
           axios.post(process.env.REACT_APP_API + 'Purchased/Create',CartItems)
           .then(response => {
           alert("CheckOut Successful, Email Sent!");
+          this.setState({textBtn: "Process Order"});
           })
           .catch(err => {
             console.log(err);
           });
     }
 
+
+
         return(
             <div class="container">
                 <form id="CheckOut" onSubmit={handleSubmit}>
                 <label class="h5">{this.state.text}</label>
                 <div class={ this.state.table}>
-              
+              <FadeIn>
                 <table class="table table-bordered">
                 <thead class="BlueGradBackground p-2">
         <tr>
@@ -93,6 +111,7 @@ this.setState({table:"d-none"});
         </tr>
                   )}
                   </table>
+                  </FadeIn>
                
                   <div class="row">
                   <div class="col-md-6">
@@ -101,7 +120,7 @@ this.setState({table:"d-none"});
                   <div class="col-md-6 text-right">
                   <h6>Total:</h6><h4 class="text-info">R {total}</h4> 
                   <br/>
-                  <Button className="btn btn-success" type="submit">Process Order</Button>
+                  <Button className="btn-success"  onClick={ () => { this.changeText("Processing...Please Wait...")}} type="submit" >{textBtn}</Button>
                   </div>
                   </div>
                   </div>

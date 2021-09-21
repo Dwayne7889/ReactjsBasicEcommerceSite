@@ -112,7 +112,7 @@ export class ProductDetails extends Component {
         return (
             <div>
            <form id="AddtoCartform" onSubmit={handleSubmit}>
-                <Card className="text-center BlueGradBackground float-right">
+                <Card className="text-center BlueGradBackground float-right formCompCurve">
                 <Card.Body>
                     <h5 class="text-white">Quantity</h5>
                    
@@ -124,7 +124,7 @@ export class ProductDetails extends Component {
                     <Button className={btnClass}  onClick={ () => { this.changeText("Item Added")}} type="submit" >{text}</Button>
                     <br/><br/>
                 <h5>Description</h5>
-                <Card.Text className='text-secondary mt-2 bg-white p-3'>                           
+                <Card.Text className='text-secondary mt-2 bg-white p-3 formCompCurve'>                           
                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in 

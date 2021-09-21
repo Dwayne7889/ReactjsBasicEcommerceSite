@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {ProductDetails} from './ProductDetails';
 import "./styles/Product.css";
+import FadeIn from 'react-fade-in';
 
 
 
@@ -28,6 +29,7 @@ export class Product extends Component{
  
     
         return(
+          
             <div >
                   {prods.map(prod=>
                   
@@ -42,10 +44,15 @@ export class Product extends Component{
 </div>
 <div className="row">
 <div className="col-md-6 text-center">
+<FadeIn>
 <img src={prod.productImage}  alt="" title={prod.productImageName} /> 
+</FadeIn>
 </div>
+
 <div className="col-md-6">
+<FadeIn>
 <ProductDetails productId={prod.id} productName={prod.productName} productPrice={prod.productPrice}  ></ProductDetails>
+</FadeIn>
 </div>
 
 </div>
@@ -53,6 +60,7 @@ export class Product extends Component{
      
                   )}
             </div>
+          
         )
     }
 }
